@@ -40,5 +40,25 @@ module.exports = [
 			filename: 'window.bundle.js',
 			path: path.resolve(__dirname, '..', 'public', 'js')
 		}
+	},
+	{
+		entry: './client/src/launchingView.ts',
+		devtool: 'inline-source-map',
+		module: {
+			rules: [
+				{
+					test: /\.tsx?$/,
+					use: 'ts-loader',
+					exclude: /node_modules/
+				}
+			]
+		},
+		resolve: {
+			extensions: ['.tsx', '.ts', '.js']
+		},
+		output: {
+			filename: 'launchingView.bundle.js',
+			path: path.resolve(__dirname, '..', 'public', 'js')
+		}
 	}
 ];

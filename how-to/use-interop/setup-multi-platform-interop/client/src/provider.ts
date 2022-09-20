@@ -176,8 +176,22 @@ function interopOverride(
 				super.setContext(payload, clientIdentity);
 			}
 		}
+
+		async handleFiredIntent(intent) {
+			console.log('intent', intent);
+			const platform: OpenFin.Platform = fin.Platform.wrapSync(fin.me.identity);
+			super.setIntentTarget(intent, {uuid: fin.me.uuid, name: 'launchingView'})
+			platform.createView({
+				name: 'launchingView',
+				url: 'http://localhost:5050/html/launchingView.html',
+				target: { uuid: 'platform-1', name: 'window1' }
+			})
+			return {appId: 'launchingView', instanceId: 'who knows'}
+		}
 	}
 	return new Override(provider, options, ...args);
 }
 
 fin.Platform.init({ interopOverride }).catch((error) => console.error(error));
+fin.me.show();
+fin.me.showDeveloperTools();

@@ -10,7 +10,7 @@
 		"forceConsistentCasingInFileNames": true,
 		"importsNotUsedAsValues": "error",
 		"moduleResolution": "node",
-		"types": ["../../../common/types/fin"]
+		"types": ["../node_modules/@openfin/core/fin"]
 	},
 	"include": ["./src/**/*.ts"]
 }

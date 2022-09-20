@@ -1,7 +1,7 @@
 {
 	"runtime": {
 		"arguments": "--v=1 --inspect",
-		"version": "26.102.70.16"
+		"version": "canary"
 	},
 	"platform": {
 		"uuid": "platform-1",
@@ -20,7 +20,11 @@
 			"showBackgroundImages": true,
 			"backgroundThrottling": true,
 			"minHeight": 445,
-			"minWidth": 354
+			"minWidth": 354,
+			"autoShow": true
+		},
+		"defaultViewOptions": {
+			"fdc3InteropApi": "2.0"
 		}
 	},
 	"snapshot": {
