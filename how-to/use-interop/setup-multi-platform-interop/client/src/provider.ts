@@ -180,13 +180,37 @@ function interopOverride(
 		async handleFiredIntent(intent) {
 			console.log('intent', intent);
 			const platform: OpenFin.Platform = fin.Platform.wrapSync(fin.me.identity);
-			super.setIntentTarget(intent, {uuid: fin.me.uuid, name: 'launchingView'})
-			platform.createView({
+			await platform.createView({
 				name: 'launchingView',
 				url: 'http://localhost:5050/html/launchingView.html',
 				target: { uuid: 'platform-1', name: 'window1' }
 			})
-			return {appId: 'launchingView', instanceId: 'who knows'}
+			super.setIntentTarget(intent, { uuid: fin.me.uuid, name: 'launchingView' })
+			return {
+				source: {appId: 'launchingView', instanceId: 'who knows'}
+			}
+		}
+
+		async handleFiredIntentForContext(context) {
+			console.log('context', context);
+			const platform: OpenFin.Platform = fin.Platform.wrapSync(fin.me.identity);
+			await platform.createView({
+				name: 'launchingView2',
+				url: 'http://localhost:5050/html/launchingView.html',
+				target: { uuid: 'platform-1', name: 'window1' }
+			})
+
+			const intentString = 'ViewChart'
+			const intentObj = {
+				name: intentString,
+				context,
+				metadata: context.metadata
+			}
+			super.setIntentTarget(intentObj, { uuid: fin.me.uuid, name: 'launchingView2' })
+			return {
+				source: { appId: 'launchingView2', instanceId: 'who knows' },
+				intent: intentString
+			}
 		}
 	}
 	return new Override(provider, options, ...args);
